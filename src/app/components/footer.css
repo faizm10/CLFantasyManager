@@ -1,0 +1,43 @@
+.footer {
+    background-color: #3573cf;
+    color: white;
+    padding: 20px 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col {
+    flex: 1;
+    padding: 10px;
+}
+
+.col h4 {
+    margin-bottom: 15px;
+}
+
+.col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.col ul li {
+    margin-bottom: 10px;
+}
+
+.col ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.bottom-footer {
+    text-align: center;
+    margin-top: 20px;
+}

@@ -20,24 +20,36 @@ export default function NavBar() {
       }}
       isBordered
     >
-      <NavbarBrand></NavbarBrand>
+      <NavbarBrand>
+      </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/">
-            {" "}
-            {/* Increased font size for links */}
+          <Link style={{ color: "white", fontSize: "16px" }} href="/"> {/* Increased font size for links */}
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link
-            style={{ color: "white", fontSize: "16px" }}
-            href="/playerStats"
-          >
+          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
             Player Stats
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
+            Team Stats
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
+            Match Predictor
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
+            UCL Quiz
+          </Link>
+        </NavbarItem>
       </NavbarContent>
+
       <NavbarContent justify="end"></NavbarContent>
     </Navbar>
   );
