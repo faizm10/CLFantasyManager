@@ -45,7 +45,7 @@ export default function NavBar() {
         </NavbarItem>
         <NavbarItem>
           <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
-            UCL Quiz
+            UCL Quiz!
           </Link>
         </NavbarItem>
       </NavbarContent>
