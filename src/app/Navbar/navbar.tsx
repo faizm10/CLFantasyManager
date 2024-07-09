@@ -34,18 +34,18 @@ export default function NavBar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
+          <Link style={{ color: "white", fontSize: "16px" }} href="/teamStats"> {/* Increased font size for links */}
             Team Stats
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
+          <Link style={{ color: "white", fontSize: "16px" }} href="/matchPredictor"> {/* Increased font size for links */}
             Match Predictor
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
-            UCL Quiz!
+          <Link style={{ color: "white", fontSize: "16px" }} href="/uclQuiz"> {/* Increased font size for links */}
+            UCL Quiz
           </Link>
         </NavbarItem>
       </NavbarContent>
