@@ -7,18 +7,27 @@ const Footer: React.FC = () => {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h4>Quick Links</h4>
+                        <h4>About</h4>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About Us</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/story">Our Story</a></li>
+                            <li><a href="/mission">Mission</a></li>
+                            <li><a href="/team">Team</a></li>
                         </ul>
                     </div>
                     <div className="col">
-                        <h4>Follow Us</h4>
+                        <h4>Support</h4>
                         <ul>
-                            <li><a href="https://facebook.com">Facebook</a></li>
-                            <li><a href="https://twitter.com">Twitter</a></li>
+                            <li><a href="/FAQ">FAQ</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/help">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div className="col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="/privacy">Privacy</a></li>
+                            <li><a href="/terms">Terms</a></li>
+                            <li><a href="/policies">Policies</a></li>
                         </ul>
                     </div>
                 </div>
