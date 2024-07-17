@@ -6,6 +6,13 @@ import {
   TableColumn,
   TableRow,
   TableCell,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
@@ -29,6 +36,7 @@ interface PlayerStats {
 
 export default function PlayerStats() {
   const [data, setData] = useState<PlayerStats[]>([]);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     fetch("/api/player-stats")
@@ -39,24 +47,21 @@ export default function PlayerStats() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
-      <main className="flex flex-1 flex-col items-center justify-center p-10 text-white">
+    <div className="flex flex-col min-h-screen bg-white font-serif font-semibold">
+      <main className="flex flex-1 flex-col items-center justify-center p-10 text-black">
         <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
         <Table
-        className="text-black"
           aria-label="Player Stats Table"
           style={{
             height: "auto",
-            minWidth: "100%",
+            width: "100%",
             backgroundColor: "white",
           }}
         >
           <TableHeader>
             <TableColumn>Player</TableColumn>
-            <TableColumn>Nation</TableColumn>
             <TableColumn>Position</TableColumn>
             <TableColumn>Squad</TableColumn>
-            <TableColumn>DOB</TableColumn>
             <TableColumn>G</TableColumn>
             <TableColumn>A</TableColumn>
             <TableColumn>Mins</TableColumn>
@@ -71,21 +76,23 @@ export default function PlayerStats() {
           <TableBody>
             {data.map((player, index) => (
               <TableRow key={index}>
-                <TableCell>{player.Player}</TableCell>
-                <TableCell>{player.Nation}</TableCell>
-                <TableCell>{player.Position}</TableCell>
-                <TableCell>{player.Squad}</TableCell>
-                <TableCell>{player.DOB}</TableCell>
-                <TableCell>{player.Goals}</TableCell>
-                <TableCell>{player.Assists}</TableCell>
-                <TableCell>{player.Minutes}</TableCell>
-                <TableCell>{player.Starts}</TableCell>
-                <TableCell>{player["G+A"]}</TableCell>
-                <TableCell>{player.NonPenKickGoals}</TableCell>
-                <TableCell>{player.PenKickAttempted}</TableCell>
-                <TableCell>{player.PenKickMade}</TableCell>
-                <TableCell>{player.Yellow}</TableCell>
-                <TableCell>{player.RedCard}</TableCell>
+                <TableCell className="bg-purple-500 rounded-lg text-center p-4">
+                  {player.Player}
+                </TableCell>
+                <TableCell className="bg-pink-500 rounded-lg text-center p-4">
+                  {player.Position}
+                </TableCell>
+                <TableCell className="text-center p-4">{player.Squad}</TableCell>
+                <TableCell className="text-center p-4">{player.Goals}</TableCell>
+                <TableCell className="text-center p-4">{player.Assists}</TableCell>
+                <TableCell className="text-center p-4">{player.Minutes}</TableCell>
+                <TableCell className="text-center p-4">{player.Starts}</TableCell>
+                <TableCell className="text-center p-4">{player["G+A"]}</TableCell>
+                <TableCell className="text-center p-4">{player.NonPenKickGoals}</TableCell>
+                <TableCell className="text-center p-4">{player.PenKickAttempted}</TableCell>
+                <TableCell className="text-center p-4">{player.PenKickMade}</TableCell>
+                <TableCell className="text-center p-4">{player.Yellow}</TableCell>
+                <TableCell className="text-center p-4">{player.RedCard}</TableCell>
               </TableRow>
             ))}
           </TableBody>
