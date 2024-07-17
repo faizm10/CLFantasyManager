@@ -6,7 +6,6 @@ import {
   TableColumn,
   TableRow,
   TableCell,
-  Card
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
@@ -44,14 +43,13 @@ export default function PlayerStats() {
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-white">
         <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
         <Table
-          // aria-label="Player Stats Table"
+        className="text-black"
+          aria-label="Player Stats Table"
           style={{
             height: "auto",
             minWidth: "100%",
             backgroundColor: "white",
           }}
-          className="text-black"
-          radius="md"
         >
           <TableHeader>
             <TableColumn>Player</TableColumn>
@@ -72,7 +70,7 @@ export default function PlayerStats() {
           </TableHeader>
           <TableBody>
             {data.map((player, index) => (
-              <TableRow key={index } className=" text-center">
+              <TableRow key={index}>
                 <TableCell>{player.Player}</TableCell>
                 <TableCell>{player.Nation}</TableCell>
                 <TableCell>{player.Position}</TableCell>
