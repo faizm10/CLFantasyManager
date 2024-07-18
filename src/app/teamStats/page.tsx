@@ -8,6 +8,7 @@ import {
   TableCell,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import './teamStats.css';
 
 interface teamStats {
   Rk: string;
@@ -28,7 +29,43 @@ interface teamStats {
   Goalkeeper: string;
 }
 
-export default function PlayerStats() {
+// Path mapping for each team logo
+const teamLogos: { [key: string]: string } = {
+  "Real Madrid": "/images/real-madrid.png",
+  "Dortmund": "/images/dortmund.png",
+  "Bayern Munich": "/images/bayern-munich.png",
+  "Paris S-G": "/images/psg.png",
+  "Manchester City": "/images/man-city.png",
+  "Atlético Madrid": "/images/atletico.png",
+  "Barcelona": "/images/barca.png",
+  "Arsenal": "/images/arsenal.png",
+  "Porto": "/images/porto.png",
+  "Inter": "/images/inter.png",
+  "RB Leipzig": "/images/leipzig.png",
+  "Lazio": "/images/lazio.png",
+  "Real Sociedad": "/images/sociedad.png",
+  "Napoli": "/images/napoli.png",
+  "PSV Eindhoven": "/images/psv.png",
+  "FC Copenhagen": "/images/copenhagen.png",
+  "Shakhtar": "/images/shaktar.png",
+  "Milan": "/images/milan.png",
+  "Lens": "/images/lens.png",
+  "Feyenoord": "/images/feyenoord.png",
+  "Newcastle Utd": "/images/newcastle.png",
+  "Galatasaray": "/images/galatasary.png",
+  "Manchester Utd": "/images/united.png",
+  "Benfica": "/images/benfica.png",
+  "RB Salzburg": "/images/salzburg.png",
+  "Young Boys": "/images/young-boys.png",
+  "Braga": "/images/braga.png",
+  "Celtic": "/images/celtic.png",
+  "Antwerp": "/images/antwerp.png",
+  "Union Berlin": "/images/union.png",
+  "Sevilla": "/images/sevilla.png",
+  "Red Star": "/images/belgrade.png",
+};
+
+export default function teamStats() {
   const [data, setData] = useState<teamStats[]>([]);
 
   useEffect(() => {
@@ -36,6 +73,10 @@ export default function PlayerStats() {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+
+        // Filter out any empty objects
+        const filteredData = data.filter((team: teamStats) => team.Squad);
+        setData(filteredData);
       });
   }, []);
 
@@ -53,6 +94,7 @@ export default function PlayerStats() {
           }}
         >
           <TableHeader>
+            <TableColumn>Logo</TableColumn>
             <TableColumn>Rk</TableColumn>
             <TableColumn>Squad</TableColumn>
             <TableColumn>MP</TableColumn>
@@ -73,6 +115,13 @@ export default function PlayerStats() {
           <TableBody>
             {data.map((team, index) => (
               <TableRow key={index}>
+                <TableCell>
+                  <img
+                    src={teamLogos[team.Squad as keyof typeof teamLogos]}
+                    alt={`${team.Squad} logo`}
+                    className="logo-img"
+                  />
+                </TableCell>
                 <TableCell>{team.Rk}</TableCell>
                 <TableCell>{team.Squad}</TableCell>
                 <TableCell>{team.MP}</TableCell>
