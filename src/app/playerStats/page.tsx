@@ -6,14 +6,12 @@ import {
   TableColumn,
   TableRow,
   TableCell,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
+  Input,
   useDisclosure,
+  Autocomplete,
+  AutocompleteItem,
 } from "@nextui-org/react";
+import { SearchIcon } from "@/components/searchIcon";
 import { useEffect, useState } from "react";
 
 interface PlayerStats {
@@ -36,6 +34,7 @@ interface PlayerStats {
 
 export default function PlayerStats() {
   const [data, setData] = useState<PlayerStats[]>([]);
+  const [search, setSearch] = useState("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -46,51 +45,46 @@ export default function PlayerStats() {
       });
   }, []);
 
+  const filteredData = data.filter((player) =>
+    player.Player.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="flex flex-col min-h-screen bg-white font-serif font-semibold">
+    <div className="flex flex-col min-h-screen bg-gray-100 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-black">
         <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
+        <input
+          className="mb-10 w-full max-w-md bg-white border border-gray-300 text-center text-black rounded-lg p-2 shadow-sm"
+          placeholder="Search Player"
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <Table
           aria-label="Player Stats Table"
+          className="bg-white shadow-lg rounded-lg"
           style={{
             height: "auto",
             width: "100%",
-            backgroundColor: "white",
           }}
         >
           <TableHeader>
-            <TableColumn>Player</TableColumn>
-            <TableColumn>Position</TableColumn>
-            <TableColumn>Squad</TableColumn>
-            <TableColumn>G</TableColumn>
-            <TableColumn>A</TableColumn>
-            <TableColumn>Mins</TableColumn>
-            <TableColumn>Starts</TableColumn>
-            <TableColumn>G+A</TableColumn>
-            <TableColumn>NonPenKickGoals</TableColumn>
-            <TableColumn>PenKickAttempted</TableColumn>
-            <TableColumn>PenKickMade</TableColumn>
-            <TableColumn>YellowCards</TableColumn>
-            <TableColumn>RedCards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Player</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Position</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Squad</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">G</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">A</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Mins</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">YellowCards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">RedCards</TableColumn>
           </TableHeader>
           <TableBody>
-            {data.map((player, index) => (
-              <TableRow key={index}>
-                <TableCell className="bg-purple-500 rounded-lg text-center p-4">
-                  {player.Player}
-                </TableCell>
-                <TableCell className="bg-pink-500 rounded-lg text-center p-4">
-                  {player.Position}
-                </TableCell>
+            {filteredData.map((player, index) => (
+              <TableRow key={index} className="odd:bg-white even:bg-gray-50 hover:bg-yellow-100">
+                <TableCell className="text-center p-4">{player.Player}</TableCell>
+                <TableCell className="text-center p-4">{player.Position}</TableCell>
                 <TableCell className="text-center p-4">{player.Squad}</TableCell>
                 <TableCell className="text-center p-4">{player.Goals}</TableCell>
                 <TableCell className="text-center p-4">{player.Assists}</TableCell>
                 <TableCell className="text-center p-4">{player.Minutes}</TableCell>
-                <TableCell className="text-center p-4">{player.Starts}</TableCell>
-                <TableCell className="text-center p-4">{player["G+A"]}</TableCell>
-                <TableCell className="text-center p-4">{player.NonPenKickGoals}</TableCell>
-                <TableCell className="text-center p-4">{player.PenKickAttempted}</TableCell>
-                <TableCell className="text-center p-4">{player.PenKickMade}</TableCell>
                 <TableCell className="text-center p-4">{player.Yellow}</TableCell>
                 <TableCell className="text-center p-4">{player.RedCard}</TableCell>
               </TableRow>
