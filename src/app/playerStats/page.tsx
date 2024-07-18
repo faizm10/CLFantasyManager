@@ -6,12 +6,9 @@ import {
   TableColumn,
   TableRow,
   TableCell,
-  Input,
   useDisclosure,
-  Autocomplete,
-  AutocompleteItem,
+  Pagination,
 } from "@nextui-org/react";
-import { SearchIcon } from "@/components/searchIcon";
 import { useEffect, useState } from "react";
 
 interface PlayerStats {
@@ -32,9 +29,12 @@ interface PlayerStats {
   RedCard: number;
 }
 
+const ITEMS_PER_PAGE = 25; // Adjust the number of items per page as needed
+
 export default function PlayerStats() {
   const [data, setData] = useState<PlayerStats[]>([]);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -48,6 +48,10 @@ export default function PlayerStats() {
   const filteredData = data.filter((player) =>
     player.Player.toLowerCase().includes(search.toLowerCase())
   );
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedData = filteredData.slice(startIndex, endIndex);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 font-serif font-semibold">
@@ -73,11 +77,11 @@ export default function PlayerStats() {
             <TableColumn className="bg-gray-200 font-bold">G</TableColumn>
             <TableColumn className="bg-gray-200 font-bold">A</TableColumn>
             <TableColumn className="bg-gray-200 font-bold">Mins</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">YellowCards</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">RedCards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Yellow Cards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold">Red Cards</TableColumn>
           </TableHeader>
           <TableBody>
-            {filteredData.map((player, index) => (
+            {paginatedData.map((player, index) => (
               <TableRow key={index} className="odd:bg-white even:bg-gray-50 hover:bg-yellow-100">
                 <TableCell className="text-center p-4">{player.Player}</TableCell>
                 <TableCell className="text-center p-4">{player.Position}</TableCell>
@@ -91,6 +95,17 @@ export default function PlayerStats() {
             ))}
           </TableBody>
         </Table>
+        <Pagination
+          total={Math.ceil(filteredData.length / ITEMS_PER_PAGE)}
+          initialPage={1}
+          showControls
+          onChange={(page) => setCurrentPage(page)}
+          className="mt-10 p-4 space-x-5"
+          color="primary"
+          size="lg"
+          
+          
+        />
       </main>
     </div>
   );
