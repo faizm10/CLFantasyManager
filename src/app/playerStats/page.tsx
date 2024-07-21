@@ -8,6 +8,7 @@ import {
   TableCell,
   useDisclosure,
   Pagination,
+  Input,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
@@ -57,10 +58,11 @@ export default function PlayerStats() {
     <div className="flex flex-col min-h-screen bg-gray-100 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-black">
         <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
-        <input
-          className="mb-10 w-full max-w-md bg-white border border-gray-300 text-center text-black rounded-lg p-2 shadow-sm"
+        <Input
+          className="mb-10 w-full max-w-md text-center text-black p-2"
           placeholder="Search Player"
           onChange={(e) => setSearch(e.target.value)}
+          variant="underlined"
         />
         <Table
           aria-label="Player Stats Table"
@@ -71,18 +73,21 @@ export default function PlayerStats() {
           }}
         >
           <TableHeader>
-            <TableColumn className="bg-gray-200 font-bold">Player</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">Position</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">Squad</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">G</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">A</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">Mins</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">Yellow Cards</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold">Red Cards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Player</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Position</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Squad</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">G</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">A</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Mins</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Yellow Cards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">Red Cards</TableColumn>
           </TableHeader>
           <TableBody>
             {paginatedData.map((player, index) => (
-              <TableRow key={index} className="odd:bg-white even:bg-gray-50 hover:bg-yellow-100">
+              <TableRow
+                key={index}
+                className="odd:bg-white even:bg-gray-50 hover:bg-yellow-100"
+              >
                 <TableCell className="text-center p-4">{player.Player}</TableCell>
                 <TableCell className="text-center p-4">{player.Position}</TableCell>
                 <TableCell className="text-center p-4">{player.Squad}</TableCell>
@@ -103,8 +108,6 @@ export default function PlayerStats() {
           className="mt-10 p-4 space-x-5"
           color="primary"
           size="lg"
-          
-          
         />
       </main>
     </div>
