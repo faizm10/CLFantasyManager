@@ -1,56 +1,62 @@
+"use client";
 import React from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
   Link,
 } from "@nextui-org/react";
 
-export default function NavBar() {
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const menuItems = [
+    { label: "Player Stats", href: "/playerStats" },
+    { label: "Team Stats", href: "/teamStats" },
+    { label: "Match Predictor", href: "/matchPredictor" },
+    { label: "UCL Quiz", href: "/uclQuiz" },
+  ];
+
   return (
-    <Navbar
-      style={{
-        backgroundColor: "#3573cf",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
-        height: "60px", // Increased height of navbar
-        padding: "0 20px", // Added padding for larger appearance
-      }}
-      isBordered
-    >
-      <NavbarBrand>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+    <Navbar onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent className="sm:hidden justify-between">
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand className="flex justify-center items-center w-full">
+          <p className="font-bold text-inherit">ACME</p>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex justify-center w-full gap-4">
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/"> {/* Increased font size for links */}
-            Home
-          </Link>
+          <Link href="/playerStats">Player Stats</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/playerStats"> {/* Increased font size for links */}
-            Player Stats
-          </Link>
+          <Link href="/teamStats">Team Stats</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/teamStats"> {/* Increased font size for links */}
-            Team Stats
-          </Link>
+          <Link href="/matchPredictor">Match Predictor</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/matchPredictor"> {/* Increased font size for links */}
-            Match Predictor
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link style={{ color: "white", fontSize: "16px" }} href="/uclQuiz"> {/* Increased font size for links */}
-            UCL Quiz
-          </Link>
+          <Link href="/uclQuiz">UCL Quiz</Link>
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="end"></NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.label}-${index}`}>
+            <Link className="w-full" href={item.href} size="lg">
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 }
