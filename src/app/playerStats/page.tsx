@@ -58,12 +58,14 @@ export default function PlayerStats() {
     <div className="flex flex-col min-h-screen bg-gray-100 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-black">
         <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
+        {/* <div className="sticky items-center justify-center top-0 bg-gray-100 z-10 w-full p-4"> */}
         <Input
-          className="mb-10 w-full max-w-md text-center text-black p-2"
+          className="mb-10 w-full max-w-md text-center text-black p-2 "
           placeholder="Search Player"
           onChange={(e) => setSearch(e.target.value)}
-          variant="underlined"
+          variant="bordered"
         />
+        {/* </div> */}
         <Table
           aria-label="Player Stats Table"
           className="bg-white shadow-lg rounded-lg"
@@ -73,14 +75,30 @@ export default function PlayerStats() {
           }}
         >
           <TableHeader>
-            <TableColumn className="bg-gray-200 font-bold text-center">Player</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">Position</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">Squad</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">G</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">A</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">Mins</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">Yellow Cards</TableColumn>
-            <TableColumn className="bg-gray-200 font-bold text-center">Red Cards</TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Player
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Position
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Squad
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              G
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              A
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Mins
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Yellow Cards
+            </TableColumn>
+            <TableColumn className="bg-gray-200 font-bold text-center">
+              Red Cards
+            </TableColumn>
           </TableHeader>
           <TableBody>
             {paginatedData.map((player, index) => (
@@ -88,14 +106,30 @@ export default function PlayerStats() {
                 key={index}
                 className="odd:bg-white even:bg-gray-50 hover:bg-yellow-100"
               >
-                <TableCell className="text-center p-4">{player.Player}</TableCell>
-                <TableCell className="text-center p-4">{player.Position}</TableCell>
-                <TableCell className="text-center p-4">{player.Squad}</TableCell>
-                <TableCell className="text-center p-4">{player.Goals}</TableCell>
-                <TableCell className="text-center p-4">{player.Assists}</TableCell>
-                <TableCell className="text-center p-4">{player.Minutes}</TableCell>
-                <TableCell className="text-center p-4">{player.Yellow}</TableCell>
-                <TableCell className="text-center p-4">{player.RedCard}</TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Player}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Position}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Squad}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Goals}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Assists}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Minutes}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.Yellow}
+                </TableCell>
+                <TableCell className="text-center p-4">
+                  {player.RedCard}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -105,8 +139,8 @@ export default function PlayerStats() {
           initialPage={1}
           showControls
           onChange={(page) => setCurrentPage(page)}
-          className="mt-10 p-4 space-x-5"
-          color="primary"
+          className="mt-10 p-4 space-x-5 "
+          color="secondary"
           size="lg"
         />
       </main>

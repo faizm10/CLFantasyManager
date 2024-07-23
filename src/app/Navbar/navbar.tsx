@@ -15,6 +15,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
+    { label: "Home", href: "/" },
     { label: "Player Stats", href: "/playerStats" },
     { label: "Team Stats", href: "/teamStats" },
     { label: "Match Predictor", href: "/matchPredictor" },
@@ -28,12 +29,15 @@ export default function App() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand className="flex justify-center items-center w-full">
+        {/* <NavbarBrand className="flex justify-center items-center w-full">
           <p className="font-bold text-inherit">ACME</p>
-        </NavbarBrand>
+        </NavbarBrand> */}
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex justify-center w-full gap-4">
+      <NavbarItem>
+          <Link href="/">Home</Link>
+        </NavbarItem>
         <NavbarItem>
           <Link href="/playerStats">Player Stats</Link>
         </NavbarItem>
