@@ -4,7 +4,7 @@ import path from 'path';
 import Papa from 'papaparse';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  const filePath = path.join(process.cwd(), 'public', 'player_stats.csv');
+  const filePath = path.join(process.cwd(), 'public', 'playerStats.csv');
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const parsedData = Papa.parse(fileContent, { header: true });
 
