@@ -59,3 +59,25 @@ tr:hover {
     margin: 20px 0;
     font-size: 1em;
 }
+
+.search-bar {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.search-bar::placeholder {
+    color: #888;
+}
+
+.search-bar:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
