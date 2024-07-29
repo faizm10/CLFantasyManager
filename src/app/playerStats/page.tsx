@@ -24,19 +24,26 @@ import { useEffect, useState } from "react";
 interface PlayerStats {
   Player: string;
   Nation: string;
-  Position: string;
+  POS: string;
   Squad: string;
-  DOB: string;
-  Goals: number;
-  Assists: number;
-  Minutes: number;
+  Age: number;
+  Born: number;
+  MP: number;
   Starts: number;
+  Min: number;
+  "90s": number;
+  Gls: number;
+  Ast: number;
   "G+A": number;
-  NonPenKickGoals: number;
-  PenKickAttempted: number;
-  PenKickMade: number;
-  Yellow: number;
-  RedCard: number;
+  "G-PK": number;
+  PK: number;
+  PKatt: number;
+  CrdY: number;
+  CrdR: number;
+  xG: number;
+  npxG: number;
+  xAG: number;
+  "npxG+xAG": number;
 }
 
 const ITEMS_PER_PAGE = 25; // Adjust the number of items per page as needed
@@ -45,9 +52,7 @@ export default function PlayerStats() {
   const [data, setData] = useState<PlayerStats[]>([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedPlayer, setSelectedPlayer] = useState<PlayerStats | null>(
-    null
-  );
+  const [selectedPlayer, setSelectedPlayer] = useState<PlayerStats | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -128,25 +133,25 @@ export default function PlayerStats() {
                   {player.Player}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.Position}
+                  {player.POS}
                 </TableCell>
                 <TableCell className="text-center p-4">
                   {player.Squad}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.Goals}
+                  {player.Gls}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.Assists}
+                  {player.Ast}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.Minutes}
+                  {player.Min}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.Yellow}
+                  {player.CrdY}
                 </TableCell>
                 <TableCell className="text-center p-4">
-                  {player.RedCard}
+                  {player.CrdR}
                 </TableCell>
                 <TableCell className="text-center p-4">
                   <Button onPress={() => handleOpenModal(player)}>
@@ -168,7 +173,7 @@ export default function PlayerStats() {
         />
       </main>
       {selectedPlayer && (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="full">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside">
           <ModalContent>
             {(onClose) => (
               <>
@@ -176,51 +181,27 @@ export default function PlayerStats() {
                   {selectedPlayer.Player}
                 </ModalHeader>
                 <ModalBody>
-                  <p>
-                    <strong>Nation:</strong> {selectedPlayer.Nation}
-                  </p>
-                  <p>
-                    <strong>Position:</strong> {selectedPlayer.Position}
-                  </p>
-                  <p>
-                    <strong>Squad:</strong> {selectedPlayer.Squad}
-                  </p>
-                  <p>
-                    <strong>Date of Birth:</strong> {selectedPlayer.DOB}
-                  </p>
-                  <p>
-                    <strong>Goals:</strong> {selectedPlayer.Goals}
-                  </p>
-                  <p>
-                    <strong>Assists:</strong> {selectedPlayer.Assists}
-                  </p>
-                  <p>
-                    <strong>Minutes:</strong> {selectedPlayer.Minutes}
-                  </p>
-                  <p>
-                    <strong>Starts:</strong> {selectedPlayer.Starts}
-                  </p>
-                  <p>
-                    <strong>G+A:</strong> {selectedPlayer["G+A"]}
-                  </p>
-                  <p>
-                    <strong>Non-Penalty Goals:</strong>{" "}
-                    {selectedPlayer.NonPenKickGoals}
-                  </p>
-                  <p>
-                    <strong>Penalty Kicks Attempted:</strong>{" "}
-                    {selectedPlayer.PenKickAttempted}
-                  </p>
-                  <p>
-                    <strong>Penalty Kicks Made:</strong>{" "}
-                    {selectedPlayer.PenKickMade}
-                  </p>
-                  <p>
-                    <strong>Yellow Cards:</strong> {selectedPlayer.Yellow}
-                  </p>
-                  <p>
-                    <strong>Red Cards:</strong> {selectedPlayer.RedCard}
-                  </p>
+                  <p><strong>Nation:</strong> {selectedPlayer.Nation}</p>
+                  <p><strong>Position:</strong> {selectedPlayer.POS}</p>
+                  <p><strong>Squad:</strong> {selectedPlayer.Squad}</p>
+                  <p><strong>Age:</strong> {selectedPlayer.Age}</p>
+                  <p><strong>Date of Birth:</strong> {selectedPlayer.Born}</p>
+                  <p><strong>Matches Played:</strong> {selectedPlayer.MP}</p>
+                  <p><strong>Starts:</strong> {selectedPlayer.Starts}</p>
+                  <p><strong>Minutes:</strong> {selectedPlayer.Min}</p>
+                  <p><strong>90s:</strong> {selectedPlayer["90s"]}</p>
+                  <p><strong>Goals:</strong> {selectedPlayer.Gls}</p>
+                  <p><strong>Assists:</strong> {selectedPlayer.Ast}</p>
+                  <p><strong>Goals + Assists:</strong> {selectedPlayer["G+A"]}</p>
+                  <p><strong>Non-Penalty Goals:</strong> {selectedPlayer["G-PK"]}</p>
+                  <p><strong>Penalty Kicks:</strong> {selectedPlayer.PK}</p>
+                  <p><strong>Penalty Kicks Attempted:</strong> {selectedPlayer.PKatt}</p>
+                  <p><strong>Yellow Cards:</strong> {selectedPlayer.CrdY}</p>
+                  <p><strong>Red Cards:</strong> {selectedPlayer.CrdR}</p>
+                  <p><strong>xG:</strong> {selectedPlayer.xG}</p>
+                  <p><strong>Non-Penalty xG:</strong> {selectedPlayer.npxG}</p>
+                  <p><strong>xAG:</strong> {selectedPlayer.xAG}</p>
+                  <p><strong>Non-Penalty xG + xAG:</strong> {selectedPlayer["npxG+xAG"]}</p>
                 </ModalBody>
                 <ModalFooter>
                   <Button

@@ -29,7 +29,7 @@ export default function App() {
           className="sm:hidden"
         />
         <NavbarBrand className="flex justify-center items-center w-full">
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Champions League Dashboard</p>
         </NavbarBrand>
       </NavbarContent>
 

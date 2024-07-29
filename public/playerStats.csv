@@ -1,4 +1,4 @@
-Rk,Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG
+Player,Nation,POS,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG
 Patrick van Aanholt,NED,DF/MF,PSV Eindhoven,32,1990,2,1,99,1.1,0,0,0,0,0,0,0,0,0.2,0.2,0.0,0.2
 Brenden Aaronson,USA,MF,Union Berlin,22,2000,6,1,137,1.5,0,0,0,0,0,0,0,0,0.5,0.5,0.0,0.5
 Salis Abdul Samed,GHA,MF,Lens,23,2000,6,6,495,5.5,0,0,0,0,0,0,2,0,0.2,0.2,0.3,0.4
@@ -30,7 +30,6 @@ Antony,BRA,FW,Manchester Utd,23,2000,4,3,232,2.6,0,0,0,0,0,0,1,0,0.0,0.0,0.1,0.1
 Jon Aramburu,VEN,DF,Real Sociedad,21,2002,1,0,30,0.3,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0
 Ronald Araújo,URU,DF,Barcelona,24,1999,8,8,658,7.3,0,0,0,0,0,0,2,0,0.9,0.9,0.3,1.2
 Tomás Araújo,POR,DF,Benfica,21,2002,3,1,161,1.8,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0
-Player,Nation,Pos,Squad,Age,Born,MP,Starts,Min,90s,Gls,Ast,G+A,G-PK,PK,PKatt,CrdY,CrdR,xG,npxG,xAG,npxG+xAG
 Marko Arnautović,AUT,FW,Inter,34,1989,4,2,192,2.1,2,0,2,2,0,0,2,0,2.9,2.9,0.0,2.9
 Kepa Arrizabalaga,ESP,GK,Real Madrid,28,1994,4,4,360,4.0,0,0,0,0,0,0,1,0,0.0,0.0,0.0,0.0
 Marco Asensio,ESP,MF/FW,Paris S-G,27,1996,6,4,440,4.9,1,1,2,0,0,0,0,0,0.4,0.4,0.2,0.6
