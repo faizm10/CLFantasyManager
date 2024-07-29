@@ -6,11 +6,18 @@ import {
   TableColumn,
   TableRow,
   TableCell,
+  Button,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import './teamStats.css';
 
-interface teamStats {
+interface TeamStats {
   Rk: string;
   Squad: string;
   MP: number;
@@ -65,28 +72,49 @@ const teamLogos: { [key: string]: string } = {
   "Red Star": "/images/belgrade.png",
 };
 
-export default function teamStats() {
-  const [data, setData] = useState<teamStats[]>([]);
+export default function TeamStats() {
+  const [data, setData] = useState<TeamStats[]>([]);
+  const [selectedTeam, setSelectedTeam] = useState<TeamStats | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     fetch("/api/team-stats")
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
-
         // Filter out any empty objects
-        const filteredData = data.filter((team: teamStats) => team.Squad);
+        const filteredData = data.filter((team: TeamStats) => team.Squad);
         setData(filteredData);
       });
   }, []);
+
+  const handleOpenModal = (team: TeamStats) => {
+    setSelectedTeam(team);
+    onOpen();
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredData = data.filter((team) =>
+    team.Squad.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-white">
         <h1 className="text-5xl mb-10 font-bold">Team Stats</h1>
+        <input
+          type="text"
+          placeholder="Search Team"
+          value={searchTerm}
+          onChange={handleSearch}
+          className="search-bar"
+        />
         <Table
           className="text-black"
-          aria-label="Player Stats Table"
+          aria-label="Team Stats Table"
           style={{
             height: "auto",
             minWidth: "100%",
@@ -105,15 +133,12 @@ export default function teamStats() {
             <TableColumn>GA</TableColumn>
             <TableColumn>GD</TableColumn>
             <TableColumn>Pts</TableColumn>
-            <TableColumn>xG</TableColumn>
-            <TableColumn>xGA</TableColumn>
-            <TableColumn>xGD</TableColumn>
-            <TableColumn>xGD/90</TableColumn>
             <TableColumn>Top Team Scorer</TableColumn>
             <TableColumn>Goalkeeper</TableColumn>
+            <TableColumn>View Full Stats</TableColumn>
           </TableHeader>
           <TableBody>
-            {data.map((team, index) => (
+            {filteredData.map((team, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <img
@@ -132,18 +157,57 @@ export default function teamStats() {
                 <TableCell>{team.GA}</TableCell>
                 <TableCell>{team.GD}</TableCell>
                 <TableCell>{team.Pts}</TableCell>
-                <TableCell>{team.xG}</TableCell>
-                <TableCell>{team["xGD/90"]}</TableCell>
-                <TableCell>{team.xGA}</TableCell>
-                <TableCell>{team.xGD}</TableCell>
                 <TableCell>{team["Top Team Scorer"]}</TableCell>
                 <TableCell>{team.Goalkeeper}</TableCell>
+                <TableCell>
+                  <Button onPress={() => handleOpenModal(team)}>
+                    View More
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </main>
+      {selectedTeam && (
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside">
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1 text-center text-4xl">
+                  {selectedTeam.Squad}
+                </ModalHeader>
+                <ModalBody>
+                  <p><strong>Rank:</strong> {selectedTeam.Rk}</p>
+                  <p><strong>Matches Played:</strong> {selectedTeam.MP}</p>
+                  <p><strong>Wins:</strong> {selectedTeam.W}</p>
+                  <p><strong>Draws:</strong> {selectedTeam.D}</p>
+                  <p><strong>Losses:</strong> {selectedTeam.L}</p>
+                  <p><strong>Goals For:</strong> {selectedTeam.GF}</p>
+                  <p><strong>Goals Against:</strong> {selectedTeam.GA}</p>
+                  <p><strong>Goal Difference:</strong> {selectedTeam.GD}</p>
+                  <p><strong>Points:</strong> {selectedTeam.Pts}</p>
+                  <p><strong>Top Team Scorer:</strong> {selectedTeam["Top Team Scorer"]}</p>
+                  <p><strong>Goalkeeper:</strong> {selectedTeam.Goalkeeper}</p>
+                  <p><strong>xG:</strong> {selectedTeam.xG}</p>
+                  <p><strong>xGA:</strong> {selectedTeam.xGA}</p>
+                  <p><strong>xGD:</strong> {selectedTeam.xGD}</p>
+                  <p><strong>xGD/90:</strong> {selectedTeam["xGD/90"]}</p>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    className="bg-red-700 text-white hover:text-black"
+                    variant="light"
+                    onPress={onClose}
+                  >
+                    Close
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      )}
     </div>
   );
 }
-
