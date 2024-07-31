@@ -44,7 +44,7 @@ export default function App() {
           <Link href="/matchPredictor">Match Predictor</Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/uclQuiz">UCL Quiz</Link>
+          <Link href="/miniGames">Mini Games</Link>
         </NavbarItem>
       </NavbarContent>
 
