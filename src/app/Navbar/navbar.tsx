@@ -15,10 +15,11 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
+    { label: "Home", href: "/" },
     { label: "Player Stats", href: "/playerStats" },
     { label: "Team Stats", href: "/teamStats" },
     { label: "Match Predictor", href: "/matchPredictor" },
-    { label: "UCL Quiz", href: "/uclQuiz" },
+    { label: "Mini Games", href: "/miniGames" },
   ];
 
   return (
@@ -34,6 +35,9 @@ export default function App() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex justify-center w-full gap-4">
+        <NavbarItem>
+          <Link href="/playerStats">Home</Link>
+        </NavbarItem>
         <NavbarItem>
           <Link href="/playerStats">Player Stats</Link>
         </NavbarItem>

@@ -52,7 +52,9 @@ export default function PlayerStats() {
   const [data, setData] = useState<PlayerStats[]>([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedPlayer, setSelectedPlayer] = useState<PlayerStats | null>(null);
+  const [selectedPlayer, setSelectedPlayer] = useState<PlayerStats | null>(
+    null
+  );
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
@@ -77,11 +79,11 @@ export default function PlayerStats() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 font-serif font-semibold">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-black">
-        <h1 className="text-5xl mb-10 font-bold">Player Stats</h1>
+        <h1 className="text-5xl mb-10 font-bold text-white">Player Stats</h1>
         <Input
-          className="mb-10 w-full max-w-md text-center text-black p-2"
+          className="mb-10 w-full max-w-md text-center text-white p-2"
           placeholder="Search Player"
           onChange={(e) => setSearch(e.target.value)}
           variant="underlined"
@@ -132,27 +134,15 @@ export default function PlayerStats() {
                 <TableCell className="text-center p-4">
                   {player.Player}
                 </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.POS}
-                </TableCell>
+                <TableCell className="text-center p-4">{player.POS}</TableCell>
                 <TableCell className="text-center p-4">
                   {player.Squad}
                 </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.Gls}
-                </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.Ast}
-                </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.Min}
-                </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.CrdY}
-                </TableCell>
-                <TableCell className="text-center p-4">
-                  {player.CrdR}
-                </TableCell>
+                <TableCell className="text-center p-4">{player.Gls}</TableCell>
+                <TableCell className="text-center p-4">{player.Ast}</TableCell>
+                <TableCell className="text-center p-4">{player.Min}</TableCell>
+                <TableCell className="text-center p-4">{player.CrdY}</TableCell>
+                <TableCell className="text-center p-4">{player.CrdR}</TableCell>
                 <TableCell className="text-center p-4">
                   <Button onPress={() => handleOpenModal(player)}>
                     View More
@@ -173,7 +163,12 @@ export default function PlayerStats() {
         />
       </main>
       {selectedPlayer && (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside">
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          size="3xl"
+          scrollBehavior="inside"
+        >
           <ModalContent>
             {(onClose) => (
               <>
@@ -181,27 +176,71 @@ export default function PlayerStats() {
                   {selectedPlayer.Player}
                 </ModalHeader>
                 <ModalBody>
-                  <p><strong>Nation:</strong> {selectedPlayer.Nation}</p>
-                  <p><strong>Position:</strong> {selectedPlayer.POS}</p>
-                  <p><strong>Squad:</strong> {selectedPlayer.Squad}</p>
-                  <p><strong>Age:</strong> {selectedPlayer.Age}</p>
-                  <p><strong>Date of Birth:</strong> {selectedPlayer.Born}</p>
-                  <p><strong>Matches Played:</strong> {selectedPlayer.MP}</p>
-                  <p><strong>Starts:</strong> {selectedPlayer.Starts}</p>
-                  <p><strong>Minutes:</strong> {selectedPlayer.Min}</p>
-                  <p><strong>90s:</strong> {selectedPlayer["90s"]}</p>
-                  <p><strong>Goals:</strong> {selectedPlayer.Gls}</p>
-                  <p><strong>Assists:</strong> {selectedPlayer.Ast}</p>
-                  <p><strong>Goals + Assists:</strong> {selectedPlayer["G+A"]}</p>
-                  <p><strong>Non-Penalty Goals:</strong> {selectedPlayer["G-PK"]}</p>
-                  <p><strong>Penalty Kicks:</strong> {selectedPlayer.PK}</p>
-                  <p><strong>Penalty Kicks Attempted:</strong> {selectedPlayer.PKatt}</p>
-                  <p><strong>Yellow Cards:</strong> {selectedPlayer.CrdY}</p>
-                  <p><strong>Red Cards:</strong> {selectedPlayer.CrdR}</p>
-                  <p><strong>xG:</strong> {selectedPlayer.xG}</p>
-                  <p><strong>Non-Penalty xG:</strong> {selectedPlayer.npxG}</p>
-                  <p><strong>xAG:</strong> {selectedPlayer.xAG}</p>
-                  <p><strong>Non-Penalty xG + xAG:</strong> {selectedPlayer["npxG+xAG"]}</p>
+                  <p>
+                    <strong>Nation:</strong> {selectedPlayer.Nation}
+                  </p>
+                  <p>
+                    <strong>Position:</strong> {selectedPlayer.POS}
+                  </p>
+                  <p>
+                    <strong>Squad:</strong> {selectedPlayer.Squad}
+                  </p>
+                  <p>
+                    <strong>Age:</strong> {selectedPlayer.Age}
+                  </p>
+                  <p>
+                    <strong>Date of Birth:</strong> {selectedPlayer.Born}
+                  </p>
+                  <p>
+                    <strong>Matches Played:</strong> {selectedPlayer.MP}
+                  </p>
+                  <p>
+                    <strong>Starts:</strong> {selectedPlayer.Starts}
+                  </p>
+                  <p>
+                    <strong>Minutes:</strong> {selectedPlayer.Min}
+                  </p>
+                  <p>
+                    <strong>90s:</strong> {selectedPlayer["90s"]}
+                  </p>
+                  <p>
+                    <strong>Goals:</strong> {selectedPlayer.Gls}
+                  </p>
+                  <p>
+                    <strong>Assists:</strong> {selectedPlayer.Ast}
+                  </p>
+                  <p>
+                    <strong>Goals + Assists:</strong> {selectedPlayer["G+A"]}
+                  </p>
+                  <p>
+                    <strong>Non-Penalty Goals:</strong> {selectedPlayer["G-PK"]}
+                  </p>
+                  <p>
+                    <strong>Penalty Kicks:</strong> {selectedPlayer.PK}
+                  </p>
+                  <p>
+                    <strong>Penalty Kicks Attempted:</strong>{" "}
+                    {selectedPlayer.PKatt}
+                  </p>
+                  <p>
+                    <strong>Yellow Cards:</strong> {selectedPlayer.CrdY}
+                  </p>
+                  <p>
+                    <strong>Red Cards:</strong> {selectedPlayer.CrdR}
+                  </p>
+                  <p>
+                    <strong>xG:</strong> {selectedPlayer.xG}
+                  </p>
+                  <p>
+                    <strong>Non-Penalty xG:</strong> {selectedPlayer.npxG}
+                  </p>
+                  <p>
+                    <strong>xAG:</strong> {selectedPlayer.xAG}
+                  </p>
+                  <p>
+                    <strong>Non-Penalty xG + xAG:</strong>{" "}
+                    {selectedPlayer["npxG+xAG"]}
+                  </p>
                 </ModalBody>
                 <ModalFooter>
                   <Button
