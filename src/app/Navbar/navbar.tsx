@@ -24,19 +24,19 @@ export default function App() {
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent className="sm:hidden justify-between">
+      <NavbarContent className="sm:hidden justify-center">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand className="flex justify-center items-center w-full">
+        <NavbarBrand className="flex justify-center items-center">
           <p className="font-bold text-inherit">Champions League Dashboard</p>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex justify-center w-full gap-4">
+      <NavbarContent className="hidden sm:flex  gap-4" justify="center">
         <NavbarItem>
-          <Link href="/playerStats">Home</Link>
+          <Link href="/">Home</Link>
         </NavbarItem>
         <NavbarItem>
           <Link href="/playerStats">Player Stats</Link>
