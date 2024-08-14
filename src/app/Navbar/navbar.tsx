@@ -16,6 +16,7 @@ export default function App() {
     { label: "Mini Games", href: "/miniGames" },
   ];
 
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -28,6 +29,8 @@ export default function App() {
         setIsScrolled(false);
       }
     };
+
+
 
     window.addEventListener('scroll', handleScroll);
     return () => {
