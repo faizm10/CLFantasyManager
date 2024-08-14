@@ -8,6 +8,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Player Stats", href: "/playerStats" },
@@ -86,5 +87,6 @@ export default function App() {
         </div>
       )}
     </nav>
+    
   );
 }
