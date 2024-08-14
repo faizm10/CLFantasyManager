@@ -23,7 +23,7 @@ export default function App() {
   ];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar onMenuOpenChange={setIsMenuOpen} style={{backgroundColor: '#3573cf'}}>
       <NavbarContent className="sm:hidden justify-center">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
