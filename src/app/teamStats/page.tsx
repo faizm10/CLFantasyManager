@@ -102,7 +102,7 @@ export default function TeamStats() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
+    <div className=" pt-10 flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
       <main className="flex flex-1 flex-col items-center justify-center p-10 text-white">
         <h1 className="text-5xl mb-10 font-bold">Team Stats</h1>
         <input
