@@ -27,6 +27,9 @@ const config: Config = {
       fontFamily: {
         sans: ['Graphik', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
+        custom: ['GamesPage', 'sans-serif'],
+        custom2: ['GameHeader', 'sans-serif'],
+        custom3: ['GameDescription', 'sans-serif']
       },
     },
   },

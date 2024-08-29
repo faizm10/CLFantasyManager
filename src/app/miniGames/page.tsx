@@ -1,57 +1,118 @@
-import React from "react";
-import {
-  Link,
-  Button,
-  Card,
-  CardFooter,
-  CardHeader,
-  CardBody,
-  Checkbox,
-  Divider,
-} from "@nextui-org/react";
+"use client"
+import React, { useState } from "react";
+import { Link, Button, Card, CardHeader, CardBody } from "@nextui-org/react";
 
-export default function uclQuiz() {
+const games = [
+  {
+    title: "Guess Who",
+    description: "Try to guess the football player!",
+    image: "/images/guess-who.gif", 
+    link: "/miniGames/guessWho",
+  },
+  {
+    title: "Quiz",
+    description: "Test your football knowledge!",
+    image: "/images/quiz.gif",
+    link: "/miniGames/quiz",
+  },
+  {
+    title: "Tic Tac Toe",
+    description: "Classic Tic Tac Toe with a football twist!",
+    image: "/images/ticTacToe.gif",
+    link: "/miniGames/ticTacToe",
+  },
+  {
+    title: "Football Wordle",
+    description: "Guess the football-related word!",
+    image: "/images/wordle.gif",
+    link: "/miniGames/wordle",
+  },
+];
+
+export default function UCLQuiz() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? games.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === games.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const currentGame = games[currentIndex];
+
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-900 to-cyan-500 font-serif font-semibold">
-      <main className="flex flex-1 flex-col items-center justify-center p-24 text-white">
-        <h1 className="text-5xl mb-5 font-bold">Mini Games</h1>
-        <div className="flex flex-wrap">
-          <Button
-            href="/miniGames/guessWho"
-            as={Link}
-            color="primary"
-            showAnchorIcon
-            variant="solid"
+    <div className="mt-4 flex flex-col min-h-screen font-serif font-semibold bg-black">
+      <div className="soccer-ball-bg">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="soccer-ball"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${8 + Math.random() * 4}s`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          ></div>
+        ))}
+      </div>
+      <main className=" flex flex-1 flex-col items-center justify-center p-10 text-white relative">
+        <h1 className="text-5xl mb-10 font-bold font-custom">Mini Games</h1>
+
+        <div className="relative flex items-center justify-center w-full max-w-4xl">
+          <button
+            className="absolute left-0 z-10 p-2 rounded-full bg-white/20 hover:bg-white/40 shadow-lg backdrop-blur-md transition-all duration-300 transform hover:scale-110 focus:outline-none"
+            onClick={handlePrev}
           >
-            Guess Who
-          </Button>
-          <Button
-            href="/miniGames/quiz"
-            as={Link}
-            color="primary"
-            showAnchorIcon
-            variant="solid"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-8 w-8 text-white"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <Link href={currentGame.link} className="w-full max-w-md">
+            <Card
+              className="cursor-pointer w-full bg-white/90 backdrop-blur-md rounded-lg shadow-2xl transition-transform transform-gpu hover:scale-105 hover:rotate-1"
+              isHoverable
+              isPressable
+            >
+              <CardHeader className="text-center">
+                <h2 className="text-3xl font-bold text-black font-custom2">{currentGame.title}</h2>
+              </CardHeader>
+              <CardBody className="flex flex-col items-center">
+                <img
+                  src={currentGame.image}
+                  alt={currentGame.title}
+                  className="h-48 w-full object-cover rounded-lg mb-4 shadow-md"
+                />
+                <p className="text-center text-lg text-black font-custom3">{currentGame.description}</p>
+              </CardBody>
+            </Card>
+          </Link>
+
+          <button
+            className="absolute right-0 z-10 p-2 rounded-full bg-white/20 hover:bg-white/40 shadow-lg backdrop-blur-md transition-all duration-300 transform hover:scale-110 focus:outline-none"
+            onClick={handleNext}
           >
-            Quiz
-          </Button>
-          <Button
-            href="/miniGames/ticTacToe"
-            as={Link}
-            color="primary"
-            showAnchorIcon
-            variant="solid"
-          >
-            Tic Tac Toe
-          </Button>
-          <Button
-            href="/miniGames/wordle"
-            as={Link}
-            color="primary"
-            showAnchorIcon
-            variant="solid"
-          >
-            Football Wordle
-          </Button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-8 w-8 text-white"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </main>
     </div>
