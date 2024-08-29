@@ -1,12 +1,12 @@
-"use client"
-import React, { useState } from "react";
-import { Link, Button, Card, CardHeader, CardBody } from "@nextui-org/react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, Card, CardHeader, CardBody } from "@nextui-org/react";
 
 const games = [
   {
     title: "Guess Who",
     description: "Try to guess the football player!",
-    image: "/images/guess-who.gif", 
+    image: "/images/guess-who.gif",
     link: "/miniGames/guessWho",
   },
   {
@@ -31,13 +31,29 @@ const games = [
 
 export default function UCLQuiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [ballPositions, setBallPositions] = useState([]);
+
+  useEffect(() => {
+    // Generate random positions for soccer balls
+    const positions = [...Array(10)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${8 + Math.random() * 4}s`,
+      animationDelay: `${Math.random() * 5}s`,
+    }));
+    setBallPositions(positions);
+  }, []);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? games.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? games.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === games.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === games.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   const currentGame = games[currentIndex];
@@ -45,20 +61,15 @@ export default function UCLQuiz() {
   return (
     <div className="mt-4 flex flex-col min-h-screen font-serif font-semibold bg-black">
       <div className="soccer-ball-bg">
-        {[...Array(10)].map((_, i) => (
+        {ballPositions.map((style, i) => (
           <div
             key={i}
             className="soccer-ball"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${8 + Math.random() * 4}s`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
+            style={style}
           ></div>
         ))}
       </div>
-      <main className=" flex flex-1 flex-col items-center justify-center p-10 text-white relative">
+      <main className="flex flex-1 flex-col items-center justify-center p-10 text-white relative">
         <h1 className="text-5xl mb-10 font-bold font-custom">Mini Games</h1>
 
         <div className="relative flex items-center justify-center w-full max-w-4xl">
