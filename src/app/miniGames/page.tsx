@@ -1,6 +1,13 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Card, CardHeader, CardBody } from "@nextui-org/react";
+
+type BallPosition = {
+  top: string;
+  left: string;
+  animationDuration: string;
+  animationDelay: string;
+};
 
 const games = [
   {
@@ -30,11 +37,10 @@ const games = [
 ];
 
 export default function UCLQuiz() {
+  const [ballPositions, setBallPositions] = useState<BallPosition[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [ballPositions, setBallPositions] = useState([]);
 
   useEffect(() => {
-    // Generate random positions for soccer balls
     const positions = [...Array(10)].map(() => ({
       top: `${Math.random() * 100}%`,
       left: `${Math.random() * 100}%`,
