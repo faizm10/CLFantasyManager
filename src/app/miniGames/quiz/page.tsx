@@ -1,69 +1,11 @@
 "use client";
-
 import React, { useState } from "react";
-
-type AnswerOption = {
-  answerText: string;
-  isCorrect: boolean;
-};
-
-type Question = {
-  questionText: string;
-  answerOptions: AnswerOption[];
-};
+import { questions, AnswerOption } from '@/app/miniGames/quiz/questions';
 
 export default function UclQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-
-  const questions: Question[] = [
-    {
-      questionText: "Who was the top scorer in the 2023/2024 UEFA Champions League season?",
-      answerOptions: [
-        { answerText: "Harry Kane", isCorrect: true },
-        { answerText: "Erling Haaland", isCorrect: false },
-        { answerText: "Robert Lewandowski", isCorrect: false },
-        { answerText: "Antoine Griezmann", isCorrect: false },
-      ],
-    },
-    {
-      questionText: "Which team kept the most clean sheets in 2023/2024 Champions League season?",
-      answerOptions: [
-        { answerText: "Manchester City", isCorrect: false },
-        { answerText: "Borussia Dortmund", isCorrect: true },
-        { answerText: "Paris Saint-Germain", isCorrect: false },
-        { answerText: "Real Madrid", isCorrect: false },
-      ],
-    },
-    {
-      questionText: "Which player provided the most assists during the 2023/2024 Champions League season?",
-      answerOptions: [
-        { answerText: "Jude Bellingham", isCorrect: true },
-        { answerText: "Ilkay Gündogan", isCorrect: false },
-        { answerText: "Bukayo Saka", isCorrect: false },
-        { answerText: "Vinícius Júnior", isCorrect: false },
-      ],
-    },
-    {
-      questionText: "Which club had the highest average possession percentage in the 2023/2024 Champions League?",
-      answerOptions: [
-        { answerText: "Barcelona", isCorrect: false },
-        { answerText: "Bayern Munich", isCorrect: true },
-        { answerText: "Manchester City", isCorrect: true },
-        { answerText: "Paris Saint-Germain", isCorrect: false },
-      ],
-    },
-    {
-      questionText: "Which player created the most chances during the 2023/2024 Champions League season?",
-      answerOptions: [
-        { answerText: "Thibaut Courtois", isCorrect: false },
-        { answerText: "Julian Brandt", isCorrect: true },
-        { answerText: "Antoine Griezmann", isCorrect: false },
-        { answerText: "Joshua Kimmich", isCorrect: false },
-      ],
-    },
-  ];
 
   const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -90,7 +32,7 @@ export default function UclQuiz() {
           <>
             <div className="text-2xl mb-6">{questions[currentQuestion].questionText}</div>
             <div className="grid grid-cols-2 gap-4">
-              {questions[currentQuestion].answerOptions.map((option, index) => (
+              {questions[currentQuestion].answerOptions.map((option: AnswerOption, index: number) => (
                 <button
                   key={index}
                   onClick={() => handleAnswerButtonClick(option.isCorrect)}
